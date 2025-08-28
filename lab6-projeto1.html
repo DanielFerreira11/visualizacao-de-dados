@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Total de Chuva (2015-2024)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <style>
+    #chart { width: 100%; height: 500px; }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">
+    Volume de chuva acumulada por ano (2015 a 2024) - Fazenda Carnaúba - Taperoá - PB.
+  </h2>
+  <div id="chart"></div>
+
+  <script>
+    var chartDom = document.getElementById('chart');
+    var myChart = echarts.init(chartDom);
+
+    var anos = [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+    var totais = [386.7, 295.0, 211.5, 764.8, 497.9, 591.3, 388.5, 938.6, 465.6, 378.2];
+
+    var option = {
+      tooltip: { trigger: 'axis' },
+      xAxis: {
+        type: 'category',
+        data: anos,
+        boundaryGap: false
+      },
+      yAxis: { type: 'value', name: 'Total de chuva (mm)' },
+      dataZoom: [
+        {
+          type: 'slider',
+          xAxisIndex: 0,
+          filterMode: 'filter',
+          startValue: 0,              
+          endValue: anos.length - 1,  
+          height: 15,
+          borderColor: 'transparent',
+          backgroundColor: 'transparent',
+          fillerColor: 'rgba(28,89,145,0.2)',
+          handleStyle: { color: '#1C5991', borderColor: '#1C5991' },
+          showDetail: false,
+          showDataShadow: false
+        },
+        {
+          type: 'inside',
+          xAxisIndex: 0,
+          filterMode: 'filter',
+          startValue: 0,
+          endValue: anos.length - 1
+        }
+      ],
+      series: [
+        {
+          data: totais,
+          type: 'line',
+          smooth: true,
+          lineStyle: { width: 3 },
+          itemStyle: { color: '#1C5991' }
+        }
+      ]
+    };
+
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
